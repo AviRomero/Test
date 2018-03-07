@@ -1,0 +1,3 @@
+/home/laura/Clase 3/otro/build/CMakeFiles/rebuild_cache.dir
+/home/laura/Clase 3/otro/build/CMakeFiles/edit_cache.dir
+/home/laura/Clase 3/otro/build/CMakeFiles/hello.dir
