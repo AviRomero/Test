@@ -1,0 +1,54 @@
+//BR15014_AG_2018
+//Ejercicio 1
+//Librerias a utilizar 
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <math.h>
+
+void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glPointSize(5);//Tamaño de los puntos
+    glBegin(GL_POINTS);//Primitiva, puntos
+	double i, x, y , x0=4.0f , y0=4.0f , x1=-4.0f, y1=-4.0f;//Declarando las variables a utilizar 
+    for (i=-4.0; i<=4;i+=0.10)//Limites de la grafica
+    {
+		x=i;
+		y=((y1-y0)/(x1-x0))*(x-x0)+y0;//Formula simplificada de Bresenham
+		
+		glColor3f(0,0,1);//Color de los puntos
+	    glVertex2f(x,y); //Graficando los puntos 
+
+	}
+	glEnd();
+    glFlush ();
+    
+    //Graficando el plano carteciano
+    glBegin(GL_LINES);//Primitivas, lineas
+    glColor3f(1,1,1);
+    glVertex2f(9,0);
+    glVertex2f(-9,0);
+    glVertex2f(0,9);
+    glVertex2f(0,-9);
+    glEnd();
+    glFlush ();
+}
+void init (void)
+{
+    glMatrixMode(GL_PROJECTION);//Para iniciar el tipo de matriz
+    glLoadIdentity();
+    glOrtho(-5.0, 5.0, -5.0, 5.0, 1.0, -1.0);//Ortho mostrardo los  4 cuadrantes.
+}
+
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize (550, 550);//Amplitud de la pantalla a mostrar
+    glutInitWindowPosition (150, 100);//Ubicacion de la pantalla dentro del monitor 
+    glutCreateWindow ("Ejercicio  de Bresenham");//Nombre a mostrar en pantalla
+    init ();
+    glutDisplayFunc(display);//Funcion  de devolucion de pantalla
+    glutMainLoop();
+    return 0;
+}
