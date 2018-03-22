@@ -1,0 +1,60 @@
+//BR15014_AG_2018
+//Ejercicio 3
+//Librerias a utilizar
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <math.h>
+
+float caly,calx=-3;//Variables a utilizar 
+
+void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glPointSize(3);//Tamaño de los puntos
+    glBegin(GL_POINTS);
+     for (double i=-2.3; i<4.0;i+=0.1)//Limites de la funcion, punto de corte con los ejes.
+    {
+		caly=(3*i)+7;//Funcion a evaluar 
+		calx+=0.1;
+		if(i==-2.3 || caly==7){
+			glColor3f(1,0,0);//Color de los puntos que tocan al eje
+			glVertex2f(i,caly);//Colocando los Puntos rojos
+		}else {
+		glColor3f(0,0,1);//Color de los puntos que no tocan los ejes
+		glVertex2f(i,caly);//Colocando los puntos azules 
+		
+		}	
+
+	}
+	glEnd();
+//Dibujando los ejes del plano carteciano
+    glBegin(GL_LINES);
+    glColor3f(1,1,1);
+    glVertex2f(9,0);
+    glVertex2f(-9,0);
+    glVertex2f(0,9);
+    glVertex2f(0,-9);
+    glEnd();
+    glFlush ();
+
+}
+void init (void)
+{
+    glMatrixMode(GL_PROJECTION);//Para iniciar el tipo de matriz
+    glLoadIdentity();
+    glOrtho(-10,10,-10,10,-10,10);//Ortho mostrardo los  4 cuadrantes.
+    
+}
+
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize (650, 550);//Amplitud de la pantalla a mostrar
+    glutInitWindowPosition (350, 100);//Ubicacion de la pantalla dentro del monitor 
+    glutCreateWindow ("Ejercicio tres");//Nombre del programa, a mostrar en la pantalla 
+    init ();
+    glutDisplayFunc(display);//Funcion  de devolucion de pantalla
+    glutMainLoop();
+    return 0;
+}
