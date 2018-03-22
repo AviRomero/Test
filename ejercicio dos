@@ -1,0 +1,44 @@
+//BR15014_AG_2018
+//Ejercicio 2
+//Librerias a utilizar
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <math.h>
+
+float caly;//Variable a utilizar 
+void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glPointSize(5);//Tamaño de los puntos
+    glBegin(GL_POINTS);
+	//
+    for (double i=-14.0; i<14;i+=0.03)//Limites de la funcion a evaluar 
+    {
+		caly=(2)*pow(i,2)+(3*i)-2;//Funcion a evaluar 
+		glColor3f(0,0,1);//	Color de la grafica 
+		glVertex2f(i,caly);//Graficacion 
+	}
+	glEnd();
+    glFlush ();
+
+}
+void init (void)
+{
+    glMatrixMode(GL_PROJECTION);//Para iniciar el tipo de matriz
+    glLoadIdentity();
+    glOrtho(-5.0, 5.0, -5.0, 5.0, -5.0, 5.0);//Ortho mostrardo los  4 cuadrantes.
+    
+}
+
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);//Modo de colores, en la pantalla
+    glutInitWindowSize (550, 550);//Amplitud de la pantalla a mostrar
+    glutInitWindowPosition (350, 100);//Ubicacion de la pantalla dentro del monitor 
+    glutCreateWindow ("Ejercicio 2");//Nomnbre a mostrar del programa 
+    init ();
+    glutDisplayFunc(display);//Funcion  de devolucion de pantalla
+    glutMainLoop();
+    return 0;
+}
